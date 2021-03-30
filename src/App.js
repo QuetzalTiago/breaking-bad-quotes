@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { computeHeadingLevel } from "@testing-library/dom";
 
 const Boton = styled.button`
   background: -webkit-linear-gradient(
@@ -17,7 +18,15 @@ const Boton = styled.button`
 `;
 
 function App() {
-  return <Boton>Obtener frase</Boton>;
+  const consultarAPI = async () => {
+    const api = await fetch(
+      "https://breaking-bad-quotes.herokuapp.com/v1/quotes"
+    );
+    const frase = await api.json();
+    console.log(frase[0]);
+  };
+
+  return <Boton onClick={consultarAPI}>Obtener frase</Boton>;
 }
 
 export default App;
